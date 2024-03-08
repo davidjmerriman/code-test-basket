@@ -84,7 +84,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyze ./src/ ./test/
+        run: vendor/bin/phpstan analyze src test
 
   validate-code:
     name: Code Style Validation
