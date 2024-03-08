@@ -35,7 +35,9 @@ class BasketTest extends TestCase
 
         /** @var IOffer|MockObject */
         $offer = $this->getMockBuilder(IOffer::class)->getMock();
-        $offer->method('discount')->willReturnCallback(fn ($lineItems, $catalog) => ($lineItems['R01'] ?? 0) >= 2 ? 3 : 0);
+        $offer->method('discount')->willReturnCallback(
+            fn ($lineItems, $catalog) => ($lineItems['R01'] ?? 0) >= 2 ? 3 : 0
+        );
 
         /** @var IOffersProvider|MockObject */
         $offers = $this->getMockBuilder(IOffersProvider::class)->getMock();
@@ -50,9 +52,12 @@ class BasketTest extends TestCase
             $actualCount = $basket->add($code);
             $this->assertEquals($counts[$index], $actualCount);
         }
-
     }
 
+    /**
+     * @param array<string> $codes
+     * @param float $expected
+     */
     #[DataProvider('dataForTotal')]
     public function testTotal(array $codes, float $expected): void
     {
@@ -75,7 +80,9 @@ class BasketTest extends TestCase
 
         /** @var IOffer|MockObject */
         $offer = $this->getMockBuilder(IOffer::class)->getMock();
-        $offer->method('discount')->willReturnCallback(fn ($lineItems, $catalog) => ($lineItems['R01'] ?? 0) >= 2 ? 3 : 0);
+        $offer->method('discount')->willReturnCallback(
+            fn ($lineItems, $catalog) => ($lineItems['R01'] ?? 0) >= 2 ? 3 : 0
+        );
 
         /** @var IOffersProvider|MockObject */
         $offers = $this->getMockBuilder(IOffersProvider::class)->getMock();
@@ -89,7 +96,6 @@ class BasketTest extends TestCase
 
         $actual = $basket->total();
         $this->assertEqualsWithDelta($expected, $actual, 0.00001);
-
     }
 
     /**
