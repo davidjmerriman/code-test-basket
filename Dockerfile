@@ -19,9 +19,10 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 COPY . /var/www/app
 WORKDIR /var/www/app
 
+# Install code coverage driver
+RUN pecl install -f pcov && docker-php-ext-enable pcov
+
 # Run composer install to set up PHP dependencies
-# CMD bash -c "composer install --no-interaction --no-scripts --no-plugins --no-progress --optimize-autoloader && echo yes | read"
-# COPY composer.* ./
 RUN composer install --optimize-autoloader
 RUN composer dump-autoload
 
