@@ -8,6 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 class TieredDeliveryTest extends TestCase
 {
+    /**
+     * @param array<int, float> $tiersToAdd
+     * @param float $subtotal
+     * @param array<string, int> $lineItems
+     * @param float $expectedCost
+     */
     #[DataProvider('dataForDeliveryCost')]
     public function testDeliveryCost(array $tiersToAdd, float $subtotal, array $lineItems, float $expectedCost): void
     {
@@ -19,6 +25,9 @@ class TieredDeliveryTest extends TestCase
         $this->assertEquals($expectedCost, $actualCost);
     }
 
+    /**
+     * @return array<array<mixed>>
+     */
     public static function dataForDeliveryCost(): array
     {
         return [
@@ -32,6 +41,10 @@ class TieredDeliveryTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<int, float> $tiersToAdd
+     * @param array<int, float> $expectedList
+     */
     #[DataProvider('dataForAddTier')]
     public function testAddTier(array $tiersToAdd, array $expectedList): void
     {
@@ -43,13 +56,16 @@ class TieredDeliveryTest extends TestCase
         $this->assertEquals($expectedList, $actualList);
     }
 
+    /**
+     * @return array<array<mixed>>
+     */
     public static function dataForAddTier(): array
     {
         return [
             'No tiers' => [[], []],
             'One tier' => [[0 => 5.95], [0 => 5.95]],
-            'Two tier' => [[0 => 5.95, 100 => 0], [0 => 5.95, 100 => 0]],
-            'Reversed' => [[100 => 0, 0 => 5.95], [0 => 5.95, 100 => 0]],
+            'Two tier' => [[0 => 5.95, 100 => 0], [0 => 5.95, 10000 => 0]],
+            'Reversed' => [[100 => 0, 0 => 5.95], [0 => 5.95, 10000 => 0]],
         ];
     }
 }

@@ -4,13 +4,16 @@ namespace CodeTestBasket\Delivery;
 
 class TieredDelivery implements IDeliveryProvider
 {
+    /** @var array<int, float> */
     private array $tiers = [];
 
     public function deliveryCost(float $subtotal, array $lineItems): float
     {
         $deliveryCost = 0;
         foreach ($this->tiers as $tier => $cost) {
-            if ($tier > $subtotal) break;
+            if ($tier/100 > $subtotal) {
+                break;
+            }
             $deliveryCost = $cost;
         }
 
@@ -26,7 +29,7 @@ class TieredDelivery implements IDeliveryProvider
      */
     public function addTier(float $tier, float $cost): self
     {
-        $this->tiers[$tier] = $cost;
+        $this->tiers[(int)($tier*100)] = $cost;
         ksort($this->tiers, SORT_NUMERIC);
         return $this;
     }
@@ -34,7 +37,7 @@ class TieredDelivery implements IDeliveryProvider
     /**
      * Lists the tiers configured for this delivery provider
      *
-     * @return array The array of tiered pricing
+     * @return array<int, float> The array of tiered pricing
      */
     public function listTiers(): array
     {
