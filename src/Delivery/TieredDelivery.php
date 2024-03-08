@@ -11,7 +11,7 @@ class TieredDelivery implements IDeliveryProvider
     {
         $deliveryCost = 0;
         foreach ($this->tiers as $tier => $cost) {
-            if ($tier/100 > $subtotal) {
+            if ($tier / 100 > $subtotal) {
                 break;
             }
             $deliveryCost = $cost;
@@ -29,7 +29,7 @@ class TieredDelivery implements IDeliveryProvider
      */
     public function addTier(float $tier, float $cost): self
     {
-        $this->tiers[(int)($tier*100)] = $cost;
+        $this->tiers[(int) ($tier * 100)] = $cost;
         ksort($this->tiers, SORT_NUMERIC);
         return $this;
     }
