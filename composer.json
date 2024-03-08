@@ -1,5 +1,7 @@
 {
     "name": "davidjmerriman/code-test-basket",
+    "description": "Code test implementing a shopping cart as a PHP project with a good foundation for future growth",
+    "license": "MIT",
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "^11.0",
