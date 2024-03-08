@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  basket-php:
+    image: php:development
+    container_name: basket-php
+    user: root
+    build: .
+    volumes:
+      - .:/var/www/app
+    tty: true
