@@ -31,7 +31,7 @@ You can check the code style against the PSR-12 standard with the following:
 
 ```bash
 docker compose exec basket-php vendor/bin/phpcs --standard=PSR12 src
-docker compose exec basket-php vendor/bin/phpcs --standard=PSR12 src
+docker compose exec basket-php vendor/bin/phpcs --standard=PSR12 tests
 ```
 
 ### Static Analysis
